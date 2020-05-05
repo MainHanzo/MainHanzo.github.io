@@ -145,6 +145,128 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/05/leetcoe%20863/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="MainHanzo">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HY's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/05/05/leetcoe%20863/" class="post-title-link" itemprop="url">leetcoe 863</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2020-05-05 17:52:48 / Modified: 18:08:54" itemprop="dateCreated datePublished" datetime="2020-05-05T17:52:48+02:00">2020-05-05</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="leetcoe-863-All-Nodes-Distance-K-in-Binary-Tree"><a href="#leetcoe-863-All-Nodes-Distance-K-in-Binary-Tree" class="headerlink" title="leetcoe 863 All Nodes Distance K in Binary Tree"></a>leetcoe 863 All Nodes Distance K in Binary Tree</h1><p>在力扣上做到了863这道题，感觉这道题非常好，综合了二叉树，图，层序遍历多方面的知识。<br>题目还是很好理解的，就是给一个二叉树里的目标节点然后去找相隔K个edge的所有节点。<br>要找的节点可以是这个目标节点下方的子节点，也可以是目标节点的父节点的子节点。</p>
+<p>这个时候的思路是很直接的，如果这个目标节点是根节点，那这道题就很简单了，我只需要用bfs去遍历树结构，然后找到对应层输出就好了。问题是这个目标节点不一定是根节点。那这时候应该会想，我们能不能选择从目标节点出发去遍历一棵树呢，这样就等价于目标节点为根节点了。答案是肯定的，但是我们知道二叉树结构是无法从子节点走向父节点的，这导致我们从目标节点出发时无法访问他的父节点以及父节点的父节点们。那这时候怎么办呢？ 一个思路就是我们破坏这个树结构来构造一个图结构，目的是为了让我们能够从子节点重新访问父节点。具体的说就是给每个节点注册一个父节点的属性。多了这样一个关系，我们就可以从子节点访问到父节点了。刚好python允许我们动态的修改对象的属性，太方便了。那只需要遍历这个树然后再给每个节点赋上父节点的值就可以了。</p>
+<p>此时，每个节点都有left, right, par 三个属性。 这时二叉树退化成了图， 我们在这个图里移动时有三个移动方向。 此时我们只需要从目标节点移动K步，就可以找到所有的距离K步的节点了。 这时候我们就进行一次图的bfs， 和二叉树bfs最大区别，就是需要多一个seen 集合，如果节点已经被访问，就不再访问了。</p>
+<p>以下是实现代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def distanceK(self, root, target, K):</span><br><span class="line">        def dfs(node, par &#x3D; None):</span><br><span class="line">            if node:</span><br><span class="line">                node.par &#x3D; par</span><br><span class="line">                dfs(node.left, node)</span><br><span class="line">                dfs(node.right, node)</span><br><span class="line"></span><br><span class="line">        dfs(root)</span><br><span class="line">        </span><br><span class="line">        seen &#x3D; &#123;target&#125;</span><br><span class="line">        queue &#x3D; [(target,0)]</span><br><span class="line">        while queue:</span><br><span class="line">            if queue[0][1] &#x3D;&#x3D; K:</span><br><span class="line">                return [node.val for node,lvl in queue]</span><br><span class="line">            node, lvl &#x3D;  queue.pop(0)</span><br><span class="line">            for n in [node.left, node.right, node.par]:</span><br><span class="line">                if n and n not in seen:</span><br><span class="line">                    seen.add(n)</span><br><span class="line">                    queue.append((n,lvl + 1))</span><br><span class="line">        return []</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/30/m/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="MainHanzo">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HY's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/04/30/m/" class="post-title-link" itemprop="url">m</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2020-04-30 15:59:23 / Modified: 16:01:28" itemprop="dateCreated datePublished" datetime="2020-04-30T15:59:23+02:00">2020-04-30</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="多线程面试点"><a href="#多线程面试点" class="headerlink" title="多线程面试点"></a>多线程面试点</h2><h3 id="线程安全性："><a href="#线程安全性：" class="headerlink" title="线程安全性："></a>线程安全性：</h3><p>当多个线程访问某个类时， 这个类始终能表现出正确当行为。</p>
+<p>###</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/25/https/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -352,7 +474,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">2</span>
+          <span class="site-state-item-count">4</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
