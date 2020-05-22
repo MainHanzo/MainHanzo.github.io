@@ -20,28 +20,33 @@
     var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="HY&#39;s blog">
-<meta property="og:url" content="http://yoursite.com/index.html">
+  <meta name="description" content="I have seen many times some leetcoding challenges demanding a simulation of one calculator. There is a general solution to this kind of question. The most basic one is to transform the infix expressio">
+<meta property="og:type" content="article">
+<meta property="og:title" content="caculator">
+<meta property="og:url" content="http://yoursite.com/2020/05/22/caculator/index.html">
 <meta property="og:site_name" content="HY&#39;s blog">
+<meta property="og:description" content="I have seen many times some leetcoding challenges demanding a simulation of one calculator. There is a general solution to this kind of question. The most basic one is to transform the infix expressio">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-05-22T12:28:16.000Z">
+<meta property="article:modified_time" content="2020-05-22T14:16:55.568Z">
 <meta property="article:author" content="MainHanzo">
+<meta property="article:tag" content="leetcode">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://yoursite.com/">
+<link rel="canonical" href="http://yoursite.com/2020/05/22/caculator/">
 
 
 <script id="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome : true,
-    isPost : false,
+    isHome : false,
+    isPost : true,
     lang   : 'en'
   };
 </script>
 
-  <title>HY's blog</title>
+  <title>caculator | HY's blog</title>
   
 
 
@@ -139,9 +144,10 @@
         <div class="content-wrap">
           
 
-          <div class="content index posts-expand">
+          <div class="content post posts-expand">
             
-      
+
+    
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
@@ -157,10 +163,9 @@
       <meta itemprop="name" content="HY's blog">
     </span>
       <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/05/22/caculator/" class="post-title-link" itemprop="url">caculator</a>
-        </h2>
+        <h1 class="post-title" itemprop="name headline">
+          caculator
+        </h1>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -184,7 +189,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>I have seen many times some leetcoding challenges demanding a simulation of one calculator. There is a general solution to this kind of question. The most basic one is to transform the infix expression to postfix expression, then solve it using stack. </p>
+        <p>I have seen many times some leetcoding challenges demanding a simulation of one calculator. There is a general solution to this kind of question. The most basic one is to transform the infix expression to postfix expression, then solve it using stack. </p>
 <p>What we use everyday is an infix expression, which means the operator of two operands come between them. On the other hand, for the postfix expression, the operator comes after the two operands. For example, if we have A + B * C as an infix expression, the corresponding postfix expression shall be: A B C * +, another example, A * B + C would become: A B * C +. We see that, the priority of operators is respected: we go through the expression from left to right, the first we meet would be first applied to the two operands before it.</p>
 <h3 id="infix-to-postfix"><a href="#infix-to-postfix" class="headerlink" title="infix to postfix"></a>infix to postfix</h3><p>So how do we convert an infix expression to postfix expression?</p>
 <ol>
@@ -217,297 +222,33 @@ return stack.pop()</code></pre><p>def doMath(op, op1, op2):<br>    if op == ‘*
 <h3 id="what-about-parenthesis"><a href="#what-about-parenthesis" class="headerlink" title="what about parenthesis?"></a>what about parenthesis?</h3><p>When we tranform infix to postfix, we could have parenthesis in our expression. For example, A + B * C would be converted to A B C * +, while (A + B) * C would be converted to A B + C *. What we need to do is to move all the operators between parenthesis to the output once we have the right parenthesis. Remember the invariant ‘the first popped elements should have higher priority’?  The operators between the parenthesis have higher priority than the operators outside, that’s why we need to pop them to output once the right parenthesis is met.</p>
 <p>in that case, the function would become:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">def infixToPostfix(infixexpr):</span><br><span class="line">    priority &#x3D; &#123;&#125;</span><br><span class="line">    priority[&#39;*&#39;] &#x3D; 2</span><br><span class="line">    priority[&#39;&#x2F;&#39;] &#x3D; 2</span><br><span class="line">    priority[&#39;+&#39;] &#x3D; 1</span><br><span class="line">    priority[&#39;-&#39;] &#x3D; 1</span><br><span class="line">    priority[&#39;(&#39;] &#x3D; 0</span><br><span class="line">    stack &#x3D; []</span><br><span class="line">    output &#x3D; []</span><br><span class="line">    tokens &#x3D; infixexpre.split()</span><br><span class="line"></span><br><span class="line">    for token in tokens:</span><br><span class="line">        if token not in &#39;+-*&#x2F;()&#39;:</span><br><span class="line">            output.append(token)</span><br><span class="line">        elif token &#x3D;&#x3D; &#39;(&#39;:</span><br><span class="line">            stack.push(token)</span><br><span class="line">        elif token &#x3D;&#x3D; &#39;)&#39;:</span><br><span class="line">            top &#x3D; stack.pop()</span><br><span class="line">            while top !&#x3D; &#39;(&#39;:</span><br><span class="line">                output.append(top)</span><br><span class="line">                top &#x3D; stack.pop()</span><br><span class="line">        else:</span><br><span class="line">            while stack and priority[stack[-1]] &gt;&#x3D; priortiy[token]:</span><br><span class="line">                output.append(stack.pop())</span><br><span class="line">            stack.push(token)</span><br><span class="line">    </span><br><span class="line">    while stack:</span><br><span class="line">        output.append(stack.pop())</span><br><span class="line">    return &#39; &#39;.join(output)</span><br></pre></td></tr></table></figure>
-      
     </div>
 
     
     
     
+
       <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
+          <div class="post-tags">
+              <a href="/tags/leetcode/" rel="tag"># leetcode</a>
+          </div>
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/05/leetcoe%20863/">
+        
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="MainHanzo">
-      <meta itemprop="description" content="">
-    </span>
 
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="HY's blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/05/05/leetcoe%20863/" class="post-title-link" itemprop="url">leetcoe 863 All Nodes Distance K in Binary Tree</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2020-05-05 12:12:57 / Modified: 18:40:44" itemprop="dateCreated datePublished" datetime="2020-05-05T12:12:57+02:00">2020-05-05</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/leetcode/" itemprop="url" rel="index"><span itemprop="name">leetcode</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>在力扣上做到了863这道题，感觉这道题非常好，综合了二叉树，图，层序遍历多方面的知识。<br>题目还是很好理解的，就是给一个二叉树里的目标节点然后去找相隔K个edge的所有节点。<br>要找的节点可以是这个目标节点下方的子节点，也可以是目标节点的父节点的子节点。</p>
-<p>这个时候的思路是很直接的，如果这个目标节点是根节点，那这道题就很简单了，我只需要用bfs去遍历树结构，然后找到对应层输出就好了。问题是这个目标节点不一定是根节点。那这时候应该会想，我们能不能选择从目标节点出发去遍历一棵树呢，这样就等价于目标节点为根节点了。答案是肯定的，但是我们知道二叉树结构是无法从子节点走向父节点的，这导致我们从目标节点出发时无法访问他的父节点以及父节点的父节点们。那这时候怎么办呢？ 一个思路就是我们破坏这个树结构来构造一个图结构，目的是为了让我们能够从子节点重新访问父节点。具体的说就是给每个节点注册一个父节点的属性。多了这样一个关系，我们就可以从子节点访问到父节点了。刚好python允许我们动态的修改对象的属性，太方便了。那只需要遍历这个树然后再给每个节点赋上父节点的值就可以了。</p>
-<p>此时，每个节点都有left, right, par 三个属性。 这时二叉树退化成了图， 我们在这个图里移动时有三个移动方向。 此时我们只需要从目标节点移动K步，就可以找到所有的距离K步的节点了。 这时候我们就进行一次图的bfs， 和二叉树bfs最大区别，就是需要多一个seen 集合，如果节点已经被访问，就不再访问了。</p>
-<p>以下是实现代码：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def distanceK(self, root, target, K):</span><br><span class="line">        def dfs(node, par &#x3D; None):</span><br><span class="line">            if node:</span><br><span class="line">                node.par &#x3D; par</span><br><span class="line">                dfs(node.left, node)</span><br><span class="line">                dfs(node.right, node)</span><br><span class="line"></span><br><span class="line">        dfs(root)</span><br><span class="line">        </span><br><span class="line">        seen &#x3D; &#123;target&#125;</span><br><span class="line">        queue &#x3D; [(target,0)]</span><br><span class="line">        while queue:</span><br><span class="line">            if queue[0][1] &#x3D;&#x3D; K:</span><br><span class="line">                return [node.val for node,lvl in queue]</span><br><span class="line">            node, lvl &#x3D;  queue.pop(0)</span><br><span class="line">            for n in [node.left, node.right, node.par]:</span><br><span class="line">                if n and n not in seen:</span><br><span class="line">                    seen.add(n)</span><br><span class="line">                    queue.append((n,lvl + 1))</span><br><span class="line">        return []</span><br></pre></td></tr></table></figure>
-      
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/05/05/leetcoe%20863/" rel="prev" title="leetcoe 863 All Nodes Distance K in Binary Tree">
+      <i class="fa fa-chevron-left"></i> leetcoe 863 All Nodes Distance K in Binary Tree
+    </a></div>
+      <div class="post-nav-item"></div>
     </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
       </footer>
+    
   </article>
   
   
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/30/m/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="MainHanzo">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="HY's blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/04/30/m/" class="post-title-link" itemprop="url">m</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2020-04-30 15:59:23 / Modified: 16:01:28" itemprop="dateCreated datePublished" datetime="2020-04-30T15:59:23+02:00">2020-04-30</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="多线程面试点"><a href="#多线程面试点" class="headerlink" title="多线程面试点"></a>多线程面试点</h2><h3 id="线程安全性："><a href="#线程安全性：" class="headerlink" title="线程安全性："></a>线程安全性：</h3><p>当多个线程访问某个类时， 这个类始终能表现出正确当行为。</p>
-<p>###</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/25/https/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="MainHanzo">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="HY's blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/04/25/https/" class="post-title-link" itemprop="url">https</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2020-04-25 11:55:41 / Modified: 13:00:42" itemprop="dateCreated datePublished" datetime="2020-04-25T11:55:41+02:00">2020-04-25</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E4%B8%AD%E6%96%87/" itemprop="url" rel="index"><span itemprop="name">中文</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>https 是 HTTP over TLS， 一种在加密信道进行 HTTP 内容传输的协议。<br>那么https是如何进行加密内容传输的呢。</p>
-<p>加密学对于我来说是个十分tricky的知识，里面牵扯到很多数学的证明和逻辑推论。但是没有关系，理解计算机的网络基础，并不需要严格证明加密学的正确性，<br>我们在理解https的原理时，只需要理解加密学的一些结论作为定理就可以了。</p>
-<h4 id="Prerequisite："><a href="#Prerequisite：" class="headerlink" title="Prerequisite："></a>Prerequisite：</h4><p>理解两个关于加密学的基本定理：</p>
-<ol>
-<li>任何用 Bob 的公钥加密的信息，可以且仅可以用Bob的私钥解密。</li>
-<li>任何人都可以用Alice 的公钥去验证某个信息是由Alice的私钥发出的。<br>第二条听起来有些绕，我们马上用访问网页这个例子来阐明具体含义。</li>
-</ol>
-<h4 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h4><p>当我们访问一个网页时，比方说我们想要访问bilibili 这个网站，我们在浏览器里输入：bilibili.com，<br>客户端向B站服务器发起了一个请求，服务器会对我们进行回应。但是我们该<strong>如何验证，回应我的人真的时B站本站呢</strong>？<br>有没有可能时别的网站假装自己是B站，来骗我的账号密码呢。 为了避免这种担忧，服务器在回应客户端的请求时，同时<br>也会返回一个证书，证书里包含自己的公钥，同时这个声称这个证书是由某个被广泛信任的第三方（certificate authority， CA）认证的，也就是<strong>用第三方自己的私钥签署</strong>的。<br>那此时，客户端就会去验证这个证书是否是被那个第三份签署的，如果属实，说明第三方信任该网站，那客户端也就有理由相信该网站。<br>此时，该<strong>如何确定我信任的第三方真的签署了这个证书呢</strong>？ 只需要在找到这个第三方的公钥就可以验证了。这就应用了我们第二条定理。那么这个CA的公钥去哪里找呢？<br>这些公钥都是被直接写进操作系统以及浏览器的，不需要网络通信来获得，这使得使用CA的公钥的安全性大大提升。</p>
-<h4 id="后续"><a href="#后续" class="headerlink" title="后续"></a>后续</h4><p>那么当这个验证成功之后，客户端信任了服务端后，该怎么进行加密的通信呢？<br>此时，客户端可以创建并发送一个密钥，并用之前拿到的证书里服务端的公钥进行加密。 这样一来，这个密钥就只可能被服务端使用自己的私钥进行解密了。<br>服务器拿到这个密钥之后，客户端和服务端就成为全网唯一拥有这个密钥的两台机器了。之后的通信内容，只需要使用密钥来加密，解密就好了。</p>
-<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>TLS的基本流程可以概括为以下几步：</p>
-<ol>
-<li>通过CA体系交换公钥（以上例子中，B站的公钥是通过CA认证的证书给到客户端的）</li>
-<li>通过非对称加密，来交换对称加密的密钥（客户端用B站的公钥，加密了自己创建的密钥，并传递给服务端）</li>
-<li>使用对称加密进行通信。</li>
-</ol>
-<h4 id="Note"><a href="#Note" class="headerlink" title="Note:"></a>Note:</h4><p>使用对称加密进行通信而不是一直使用非对称加密通信的原因是，非对称加密算法比对称加密复杂，处理起来也更慢，所以现在广泛采用的方式是用非对称加密来传递对称加密的密钥，以此<br>安全的开始对称加密通信。</p>
-<p>This article is inspired by this youtube video and article:<br><a href="https://www.youtube.com/watch?v=T4Df5_cojAs" target="_blank" rel="noopener">https://www.youtube.com/watch?v=T4Df5_cojAs</a><br><a href="https://zhuanlan.zhihu.com/p/36981565" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/36981565</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/17/hello-world/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="MainHanzo">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="HY's blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/04/17/hello-world/" class="post-title-link" itemprop="url">100 leetcode!!</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2020-04-17 16:35:16 / Modified: 20:35:16" itemprop="dateCreated datePublished" datetime="2020-04-17T16:35:16+02:00">2020-04-17</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>I still remember that when I first tried one question on leetcode. It was probably one easy question and it was like a century problem for me.<br>After one hundred questions submitted, I think that I start to appreciate the beauty of algorithm. I hope I could improve my coding ability with practicing leetcode. </p>
-<p>Plus, I think I would share some of my thoughts here. Maybe it’a about my life maybe it’s about coding or maybe something else. Who knows.<br>I hope both I and anyone reading this would enjoy our lives.</p>
-<p>Cheers</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-
   
 
 
@@ -560,6 +301,7 @@ return stack.pop()</code></pre><p>def doMath(op, op1, op2):<br>    if op == ‘*
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#infix-to-postfix"><span class="nav-number">1.</span> <span class="nav-text">infix to postfix</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#postfix-evaluation"><span class="nav-number">2.</span> <span class="nav-text">postfix evaluation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#what-about-parenthesis"><span class="nav-number">3.</span> <span class="nav-text">what about parenthesis?</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
