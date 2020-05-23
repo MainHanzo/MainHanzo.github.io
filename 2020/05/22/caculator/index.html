@@ -28,7 +28,7 @@
 <meta property="og:description" content="I have seen many times some leetcoding challenges demanding a simulation of one calculator. There is a general solution to this kind of question. The most basic one is to transform the infix expressio">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-05-22T12:28:16.000Z">
-<meta property="article:modified_time" content="2020-05-22T14:20:28.362Z">
+<meta property="article:modified_time" content="2020-05-23T13:30:19.107Z">
 <meta property="article:author" content="MainHanzo">
 <meta name="twitter:card" content="summary">
 
@@ -172,10 +172,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2020-05-22 14:28:16 / Modified: 16:20:28" itemprop="dateCreated datePublished" datetime="2020-05-22T14:28:16+02:00">2020-05-22</time>
+              <time title="Created: 2020-05-22 14:28:16" itemprop="dateCreated datePublished" datetime="2020-05-22T14:28:16+02:00">2020-05-22</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-05-23 15:30:19" itemprop="dateModified" datetime="2020-05-23T15:30:19+02:00">2020-05-23</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -217,16 +223,9 @@
 <li>iterate through the token list<br> if token is an operand, push it to stack<br> if token is an operator, pop the stakc twice so we have two operands. calculate the value and push it to the stack</li>
 <li>when the input expression has been processed, the result in on the stack.</li>
 </ol>
-<p>def postfixEval(postfixExpr):<br>    stack = []<br>    tokens = postfixExpr.split()</p>
-<pre><code>for token in tokens:
-    if token not in &apos;+-*/&apos;:
-        stack.push(int(token))
-    else:
-        op1 = stack.pop()
-        op2 = stack.pop()
-        result = doMath(token, op1, op2)
-        stack.push(result)
-return stack.pop()</code></pre><p>def doMath(op, op1, op2):<br>    if op == ‘*’:<br>        return op1 * op2<br>    elif op == ‘/‘:<br>        return op1 / op2<br>    elif op == ‘+’:<br>        return op1 + op2<br>    else:<br>        return op1 - op2</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">def postfixEval(postfixExpr):</span><br><span class="line">    stack &#x3D; []</span><br><span class="line">    tokens &#x3D; postfixExpr.split()</span><br><span class="line">    </span><br><span class="line">    for token in tokens:</span><br><span class="line">        if token not in &#39;+-*&#x2F;&#39;:</span><br><span class="line">            stack.push(int(token))</span><br><span class="line">        else:</span><br><span class="line">            op1 &#x3D; stack.pop()</span><br><span class="line">            op2 &#x3D; stack.pop()</span><br><span class="line">            result &#x3D; doMath(token, op1, op2)</span><br><span class="line">            stack.push(result)</span><br><span class="line">    return stack.pop()</span><br><span class="line">def doMath(op, op1, op2):</span><br><span class="line">    if op &#x3D;&#x3D; &#39;*&#39;:</span><br><span class="line">        return op1 * op2</span><br><span class="line">    elif op &#x3D;&#x3D; &#39;&#x2F;&#39;:</span><br><span class="line">        return op1 &#x2F; op2</span><br><span class="line">    elif op &#x3D;&#x3D; &#39;+&#39;:</span><br><span class="line">        return op1 + op2</span><br><span class="line">    else:</span><br><span class="line">        return op1 - op2</span><br></pre></td></tr></table></figure>
+
+
 <h3 id="what-about-parenthesis"><a href="#what-about-parenthesis" class="headerlink" title="what about parenthesis?"></a>what about parenthesis?</h3><p>When we tranform infix to postfix, we could have parenthesis in our expression. For example, A + B * C would be converted to A B C * +, while (A + B) * C would be converted to A B + C *. What we need to do is to move all the operators between parenthesis to the output once we have the right parenthesis. Remember the invariant ‘the first popped elements should have higher priority’?  The operators between the parenthesis have higher priority than the operators outside, that’s why we need to pop them to output once the right parenthesis is met.</p>
 <p>in that case, the function would become:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">def infixToPostfix(infixexpr):</span><br><span class="line">    priority &#x3D; &#123;&#125;</span><br><span class="line">    priority[&#39;*&#39;] &#x3D; 2</span><br><span class="line">    priority[&#39;&#x2F;&#39;] &#x3D; 2</span><br><span class="line">    priority[&#39;+&#39;] &#x3D; 1</span><br><span class="line">    priority[&#39;-&#39;] &#x3D; 1</span><br><span class="line">    priority[&#39;(&#39;] &#x3D; 0</span><br><span class="line">    stack &#x3D; []</span><br><span class="line">    output &#x3D; []</span><br><span class="line">    tokens &#x3D; infixexpre.split()</span><br><span class="line"></span><br><span class="line">    for token in tokens:</span><br><span class="line">        if token not in &#39;+-*&#x2F;()&#39;:</span><br><span class="line">            output.append(token)</span><br><span class="line">        elif token &#x3D;&#x3D; &#39;(&#39;:</span><br><span class="line">            stack.push(token)</span><br><span class="line">        elif token &#x3D;&#x3D; &#39;)&#39;:</span><br><span class="line">            top &#x3D; stack.pop()</span><br><span class="line">            while top !&#x3D; &#39;(&#39;:</span><br><span class="line">                output.append(top)</span><br><span class="line">                top &#x3D; stack.pop()</span><br><span class="line">        else:</span><br><span class="line">            while stack and priority[stack[-1]] &gt;&#x3D; priortiy[token]:</span><br><span class="line">                output.append(stack.pop())</span><br><span class="line">            stack.push(token)</span><br><span class="line">    </span><br><span class="line">    while stack:</span><br><span class="line">        output.append(stack.pop())</span><br><span class="line">    return &#39; &#39;.join(output)</span><br></pre></td></tr></table></figure>
